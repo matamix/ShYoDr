@@ -1,0 +1,62 @@
+CREATE DATABASE PROESSABETA CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;;
+
+SELECT PROESSABETA;
+
+CREATE TABLE entites (
+    id int NOT NULL, 
+    LibelleEntite VARCHAR(200) NOT NULL,
+    ObjectifPrincipal VARCHAR(2000) NOT NULL,
+    StrategieEntite VARCHAR(2000) NOT NULL,
+    DeveloppementEntite VARCHAR(2000) NOT NULL,
+    ObjectifEquipe VARCHAR(2000) NOT NULL);
+    
+CREATE TABLE utilisateur (
+	id int NOT NULL,
+    Nom VARCHAR(50) NOT NULL,
+    Prenom VARCHAR(50) NOT NULL,
+    NNI CHAR(6) NOT NULL,
+    MotDePasse VARCHAR(50) NOT NULL,
+    admin BOOLEAN NOT NULL,
+    Poste VARCHAR(200) NOT NULL);
+
+CREATE TABLE assoc_user_entite(
+    idUser int NOT NULL,
+    idEntite int NOT NULL,
+    ObjectifPersonnel VARCHAR(2000) NOT NULL);
+    
+INSERT INTO utilisateur (id, Nom, Prenom, NNI, MotDePasse, admin, Poste) 
+	VALUES	(1,'Hary', 'Yann', 'G05179', 'test', 1, 'Vendeur'),
+    		(2,'Couet', 'Olivier', 'A05726', 'test', 0, 'Administrateur'),
+            (3,'Dupont', 'Pierre', 'G05784', 'test', 1, 'Vendeur');
+            
+INSERT INTO assoc_user_entite (idUser, idEntite, ObjectifPersonnel) 
+	VALUES	(1,1, 'Objectif Personnel Yann Gaz'),
+    		(1,2, 'Objectif Personnel Yann AD'),
+            (1,3, 'Objectif Personnel Yann PA'),
+            (1,4, 'Objectif Personnel Yann FE'),
+            (1,5, 'Objectif Personnel Yann SC'),
+            (1,6, 'Objectif Personnel Yann CP'),
+            
+            (2,1, 'Objectif Personnel Olivier Gaz'),
+            (2,2, 'Objectif Personnel Olivier AD'),
+            (2,3, 'Objectif Personnel Olivier PA'),
+            (2,4, 'Objectif Personnel Olivier FE'),
+            (2,5, 'Objectif Personnel Olivier SC'),
+            (2,6, 'Objectif Personnel Olivier CP'),
+            
+            (3,1, 'Objectif Personnel Pierre Gaz'),
+            (3,2, 'Objectif Personnel Pierre AD'),
+            (3,4, 'Objectif Personnel Pierre PA'),
+            (3,5, 'Objectif Personnel Pierre FE'),
+            (3,6, 'Objectif Personnel Pierre SC'),
+            (3,7, 'Objectif Personnel Pierre CP');
+            
+ 
+
+INSERT INTO `entites`(`id`, `LibelleEntite`, `ObjectifPrincipal`, `StrategieEntite`, `DeveloppementEntite`, `ObjectifEquipe`) VALUES (1,'Gaz','+17% de vente','Stratégie Gaz','Développement Gaz','Objectif Equipe Gaz'),
+	(2,'Assistance Dépannage','+17% de vente','Stratégie AD','Développement AD','Objectif Equipe AD'),
+    (3,'Prélèvement Automatique','+17% de vente','Stratégie PA','Développement PA','Objectif Equipe PA'),
+    (4,'Facture Electronique','+17% de vente','Stratégie FE','Développement FE','Objectif Equipe FE'),
+    (5,'Suivi Conso','+17% de vente','Stratégie Suivi Conso','Développement SC','Objectif Equipe SC'),
+    (6,'Conseil à la Puissance','+17% de vente','Stratégie CP','Développement CP','Objectif Equipe CP');            
+    		
