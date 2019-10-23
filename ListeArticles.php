@@ -1,4 +1,28 @@
+<?php
+include_once ('function.php');
+mysqli_query($db,"SET NAMES 'UTF8'");
+openDB();
 
+$listDefi = mysqli_query($db, "SELECT * FROM assoc_user_defi");
+
+if (isAdmin()) {
+$loginUtilisateur = $_SESSION['user']['NNI']; 
+$nomUtilisateur = $_SESSION['user']['nom'];
+$prenomUtilisateur = $_SESSION['user']['prenom'];
+}
+$retour = mysql_query("SELECT * FROM utilisateur ORDER BY id");
+$donnees = mysql_fetch_array($retour);
+
+If (isset($_GET['id'])){
+$variable = $_GET['id'];
+$variable2 = str_replace("'", "", $variable);
+}
+
+$retourArticles = mysqli_query($db,"SELECT * FROM articles WHERE secteur_id=".$variable2."");
+
+$libelle = mysqli_query($db, "SELECT libelleSecteur FROM assoc_secteur where id=".$variable2."");
+$donneesLibelle = mysqli_fetch_array($libelle);
+?>
 <!DOCTYPE html>
 <html lang="fr-FR" dir="ltr">
   <head>

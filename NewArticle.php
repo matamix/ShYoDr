@@ -1,4 +1,27 @@
+<?php
+// on se connecte à notre base
+include_once ('function.php');
+mysqli_query($db,"SET NAMES 'UTF8'");
+openDB();
+if (!isAdmin()) {
+    $_SESSION['msg'] = "You must log in first";
+    header('location: login.php');
+}
+$listDefi = mysqli_query($db, "SELECT * FROM assoc_user_defi");
 
+$loginUtilisateur = $_SESSION['user']['NNI']; 
+$nomUtilisateur = $_SESSION['user']['nom'];
+$prenomUtilisateur = $_SESSION['user']['prenom'];
+$retour = mysql_query("SELECT * FROM utilisateur ORDER BY id");
+$donnees = mysql_fetch_array($retour);
+
+If (isset($_GET['id'])){
+$variable = $_GET['id'];
+$variable2 = str_replace("'", "", $variable);
+}
+
+$retourLibelle = mysqli_query($db,"SELECT * FROM assos_secteur");
+?>
 <!DOCTYPE html>
 <html lang="fr-FR" dir="ltr">
   <head>
