@@ -1,3 +1,40 @@
+<?php
+// on se connecte à notre base
+include_once ('function.php');
+mysqli_query($db,"SET NAMES 'UTF8'");
+openDB();
+
+$listDefi = mysqli_query($db, "SELECT * FROM assoc_user_defi");
+
+if (isAdmin()) {
+$loginUtilisateur = $_SESSION['user']['NNI']; 
+}
+
+$retour = mysql_query("SELECT * FROM utilisateur ORDER BY id");
+$donnees = mysql_fetch_array($retour);
+
+If (isset($_GET['id'])){
+$variable = $_GET['id'];
+$variable2 = str_replace("'", "", $variable);
+}
+
+$retourSecteur1 = mysqli_query($db,"SELECT * FROM articles WHERE secteur_id=1 ORDER BY datePublication DESC LIMIT 3");
+$retourSecteur2 = mysqli_query($db,"SELECT * FROM articles WHERE secteur_id=2 ORDER BY datePublication DESC LIMIT 3");
+$retourSecteur3 = mysqli_query($db,"SELECT * FROM articles WHERE secteur_id=3 ORDER BY datePublication DESC LIMIT 3");
+$retourSecteur4 = mysqli_query($db,"SELECT * FROM articles WHERE secteur_id=4 ORDER BY datePublication DESC LIMIT 3");
+
+$retourSecteurLibelle1 = mysqli_query($db, "SELECT libelleSecteur FROM assoc_secteur WHERE id=1");
+$donneesSecteurLibelle1 = mysqli_fetch_array($retourSecteurLibelle1);
+
+$retourSecteurLibelle2 = mysqli_query($db, "SELECT libelleSecteur FROM assoc_secteur WHERE id=2");
+$donneesSecteurLibelle2 = mysqli_fetch_array($retourSecteurLibelle2);
+
+$retourSecteurLibelle3 = mysqli_query($db, "SELECT libelleSecteur FROM assoc_secteur WHERE id=3");
+$donneesSecteurLibelle3 = mysqli_fetch_array($retourSecteurLibelle3);
+
+$retourSecteurLibelle4 = mysqli_query($db, "SELECT libelleSecteur FROM assoc_secteur WHERE id=4");
+$donneesSecteurLibelle4 = mysqli_fetch_array($retourSecteurLibelle4);
+?>
 <!DOCTYPE html>
 <html lang="fr-FR" dir="ltr">
   <head>
@@ -18,6 +55,17 @@
             <ul class="nav navbar-nav navbar-right">
               <li class="Toggle"><a class="Toggle" href="index.php"> Actualités <span class="icon-newspaper"></a>             
               </li>
+              <?php if (!isAdmin()){
+              print ('<li class="Toggle"><a class="Toggle" href="login.php"> <span class="icon-tools-2"></a>             
+              </li>');
+              } ?>
+              <?php if (isAdmin()){
+                print('<li class="Toggle"><a class="Toggle" href="NewArticle.php"> Partager Articles <span class="icon-upload"></a>             
+              </li>');
+                print('<li class="Toggle"><a class="Toggle" href="sql/deconnexion.php"> Se Déconnecter</a>             
+              </li>');
+              }
+              ?>
           </div>
         </div>
       </nav>
